@@ -39,24 +39,20 @@ class addCaptionViewController: UIViewController, UIImagePickerControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     @IBOutlet var captionTextField: UITextField!
-    
+   
     @IBAction func save(_ sender: UIButton) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-            
-            let photoToSave = Photos(entity: Photos.entity(), insertInto: context)
+            let photoToSave = Photos(entity:Photos.entity(), insertInto: context)
             photoToSave.caption = captionTextField.text
-            photoToSave.emojiIcon = emojiIcon.text
-            
             if let userImage = newImageView.image {
                 if let userImageData = UIImagePNGRepresentation(userImage) {
                     photoToSave.imageData = userImageData
                 }
             }
-            
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-            
-            navigationController?.popViewController(animated: true)
+           (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+           navigationController?.popViewController(animated: true)
         }
     }
-    
 }
+
+
