@@ -8,26 +8,23 @@
 
 import UIKit
 
-class enlargedPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+class enlargedPhotoViewController: UIViewController {
 
     @IBOutlet weak var enlargedPhoto: UIImageView!
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            enlargedPhoto.image = selectedImage
+    @IBOutlet weak var label: UILabel!
+    
+    var photos : Photos?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let realPhoto = photos {
+            label.text = realPhoto.caption
+            if let cellPhotoImageData = realPhoto.imageData {
+                if let cellPhotoImage = UIImage(data: cellPhotoImageData) {
+                    enlargedPhoto.image = cellPhotoImage
+                }
         }
-        dismiss(animated: true, completion: nil)
+    }
+
     }
 }
